@@ -10,6 +10,7 @@ function ExerciseCard({ exercise }) {
         <div className="exercise-card">
             <h2>{exercise.name}</h2>
             <p>Type: {exercise.type} </p>
+            <p>Difficulty: {exercise.difficulty}</p>
             <button onClick={() => setShowInstructions(!showInstructions)}>
                 {showInstructions ? "Hide Instructions" : "Show Instructions"}
             </button>
