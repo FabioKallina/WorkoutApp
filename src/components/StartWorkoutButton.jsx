@@ -1,13 +1,10 @@
 
-function StartWorkout() {
-
-    function onStart(e) {
-        e.preventDefault();
-    }
-
+function StartWorkoutButton({ onClick }) {
     return (
-        <button className="start-button" onClick={onStart}>Start Workout</button>
+        <button onClick={onClick} className="start-workout-button">
+            Start Workout
+        </button>
     );
 }
 
-export default StartWorkout;
+export default StartWorkoutButton;

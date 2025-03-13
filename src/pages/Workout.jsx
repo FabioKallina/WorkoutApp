@@ -1,106 +1,98 @@
-
 import { useState } from "react";
-import "../css/Workout.css";
 import { searchExercises } from "../services/API";
-import StartWorkout from "../components/StartWorkoutButton";
-import ExerciseCard from "../components/ExerciseCard";
+import StartWorkoutButton from "../components/StartWorkoutButton";
+import ExerciseInput from "../components/ExerciseInput";
+import "../css/Workout.css";
 
 function Workout() {
 
-    const [workoutStarted, setWorkoutStarted] = useState(false);
+    const [workoutExercises, setWorkoutExercises] = useState([]);
+    const [showSearch, setShowSearch] = useState(false);
     const [searchQuery, setSearchQuery] = useState("");
-    const [exercises, setExercises] = useState([]);
+    const [searchResults, setSearchResults] = useState([]);
     const [addedExercises, setAddedExercises] = useState([]);
-    const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
-    function handleStartWorkout() {
-        setWorkoutStarted(true);
-    }
+    const handleStartWorkout = () => {
+        console.log("Start workout button clicked");
+        setShowSearch(true);
+    };
 
-    async function handleSearch(e) {
+    const handleSearch = async (e) => {
+        const query = e.target.value;
+        setSearchQuery(query);
 
-        e.preventDefault();
-        if (!searchQuery.trim()) return;
+        if (!query.trim()) {
+            setSearchResults([]);
+            return;
+        }
 
-        setLoading(true);
         try {
-
-            const results = await searchExercises(searchQuery);
-            setExercises(results);
+            const results = await searchExercises(query);
+            setSearchResults(results);
             setError(null);
-
-        }
-        catch (err) {
-
+        } catch (err) {
             console.error(err);
-            setError("Failed to search exercise...");
-
+            setError("Failed to fetch exercises...");
         }
-        finally {
+    };
 
-            setLoading(false);
-
+    const handleAddExercise = (exercise) => {
+        if (!addedExercises.some((ex) => ex.name === exercise.name)) {
+            setAddedExercises((prev) => [...prev, exercise]);
+            setSearchResults([]);
+            setSearchQuery("")
         }
-    }
+    };
 
-    function handleAddExercise(exercise) {
-        if (!addedExercises.find((ex) => ex.name === exercise.name)) {
-            setAddedExercises((prev) => [...prev, exercise])
-        }
-    }
-
-    function handleRemoveExercise(name) {
-        setAddedExercises((prev) => prev.filter((ex) => ex.name !== name))
-    }
+    const handleRemoveExercise = (id) => {
+        setAddedExercises((prevExercises) => 
+            prevExercises.filter((exercise) => exercise.id !== id)
+        );
+    };
 
     return (
         <div className="workout-page">
-            {!workoutStarted ? (
-                <button onClick={handleStartWorkout} className="start-button">
-                    Start Workout
-                </button>
-            ) : (
-                <>
-                <form onSubmit={handleSearch} className="search-form">
-                    <input 
+            <h2>{addedExercises.length > 0 ? "Your Workout" : "No Exercises Added Yet"}</h2>
+
+            {/* Start Workout Button */}
+            {!showSearch && (
+                <StartWorkoutButton onClick={handleStartWorkout} />
+            )}
+
+            {/* Search Form */}
+            {showSearch && (
+                <div className="search-section">
+                    <input
                         type="text"
                         placeholder="Search for an exercise..."
                         value={searchQuery}
-                        onChange={(e) => setSearchQuery(e.target.value)}
+                        onChange={handleSearch}
+                        className="search-input"
                     />
-                    <button type="submit">Search</button>
-                </form>
-
-                {loading && <p>Loading...</p>}
-                {error && <p className="error">{error}</p>}
-
-                <div className="exercise-list">
-                    {exercises.map((exercise) => (
-                        <div key={exercise.name} className="exercise-item">
-                            <ExerciseCard exercise={exercise} />
-                            <button onClick={() => handleAddExercise(exercise)}>
-                                + Add
-                            </button>
-                        </div>
-                    ))}
+                    <div className="search-results">
+                        {searchResults.map((exercise) => (
+                            <div key={exercise.id} className="search-result-item">
+                                <span>{exercise.name}</span>
+                                <button onClick={() => handleAddExercise(exercise)}>Add</button>
+                            </div>
+                        ))}
+                    </div>
                 </div>
-
-                <h3>Exercises: </h3>
-                {addedExercises.length > 0 ? (
-                    addedExercises.map((exercise) => (
-                        <div key={exercise.name} className="added-exercise">
-                            <p>{exercise.name}</p>
-                            <button onClick={() => handleRemoveExercise(exercise.name)}>Remove</button>
-                        </div>
-                    ))
-                ) : (
-                    <p>No exercises added yet.</p>
-                )}
-
-                </>
-                
             )}
+
+            {/* Display Added Exercises */}
+            <div className="exercise-list">
+                {addedExercises.map((exercise) => (
+                    <ExerciseInput 
+                        key={exercise.name} 
+                        exercise={exercise} 
+                        onRemove={() => handleRemoveExercise(exercise.id)}
+                    />
+                ))}
+            </div>
+
+            {error && <p className="error">{error}</p>}
         </div>
     );
 }
