@@ -7,6 +7,7 @@ import "../css/Workout.css";
 function Workout() {
 
     const [workoutExercises, setWorkoutExercises] = useState([]);
+    const [workoutStarted, setWorkoutStarted] = useState(false);
     const [showSearch, setShowSearch] = useState(false);
     const [searchQuery, setSearchQuery] = useState("");
     const [searchResults, setSearchResults] = useState([]);
@@ -15,7 +16,8 @@ function Workout() {
 
     const handleStartWorkout = () => {
         console.log("Start workout button clicked");
-        setShowSearch(true);
+        setShowSearch(false);
+        setWorkoutStarted(true);
     };
 
     const handleSearch = async (e) => {
@@ -41,7 +43,8 @@ function Workout() {
         if (!addedExercises.some((ex) => ex.name === exercise.name)) {
             setAddedExercises((prev) => [...prev, exercise]);
             setSearchResults([]);
-            setSearchQuery("")
+            setSearchQuery("");
+            setShowSearch(false);
         }
     };
 
@@ -56,8 +59,17 @@ function Workout() {
             <h2>{addedExercises.length > 0 ? "Your Workout" : "No Exercises Added Yet"}</h2>
 
             {/* Start Workout Button */}
-            {!showSearch && (
+            {!workoutStarted && (
                 <StartWorkoutButton onClick={handleStartWorkout} />
+            )}
+
+            {workoutStarted && !showSearch && (
+                <button
+                    onClick={() => setShowSearch(true)}
+                    className="add-exercise-button"
+                >
+                    + Add Exercise
+                </button>
             )}
 
             {/* Search Form */}
