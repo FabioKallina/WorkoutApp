@@ -6,8 +6,9 @@ function ExerciseInput({ exercise, onRemove }) {
 
     const [showInstructions, setShowInstructions] = useState(false);
     const [sets, setSets] = useState([
-        { id: Date.now(), weight: "", reps: "", completed: false}
+        { id: Date.now(), weight: "", reps: "", completed: false }
     ]);
+    const [showModal, setShowModal] = useState(false);
 
     const handleChange = (index, field, value) => {
 
@@ -33,37 +34,48 @@ function ExerciseInput({ exercise, onRemove }) {
 
         setSets((prevSets) => [
             ...prevSets,
-            { id: Date.now(), weight: "", reps: "", completed: false}
+            { id: Date.now(), weight: "", reps: "", completed: false }
         ]);
     };
 
+
     return (
         <div className="input-card">
+
+            <button className="instructions-info" onClick={() => setShowModal(true)}>?</button>
+
             <h2>{exercise.name}</h2>
-            
+
             {sets.map((set, index) => (
 
                 <div key={set.id} className={`setRow ${set.completed ? "Completed" : ""}`}>
 
-                    <div className="label">
-                        <label>Weight:</label>
-                        <label>Reps:</label>
+                    <div className="input-pair">
+                        <div className="input-group">
+                            <label>Weight:</label>
+                            <input
+                                type="number"
+                                value={set.weight}
+                                onChange={(e) => handleChange(index, "weight", e.target.value)}
+                            />
+
+                        </div>
+
+                        <div className="input-group">
+                            <label>Reps:</label>
+                            <input
+                                type="number"
+                                value={set.reps}
+                                onChange={(e) => handleChange(index, "reps", e.target.value)}
+                            />
+                        </div>
+
+                        <div className="button-group">
+                            <button className="completed-button" onClick={() => handleConfirm(index)}>✔</button>
+                            <button className="deleted-button" onClick={() => handleDeleteSet(index)}>✖</button>
+                        </div>
                     </div>
 
-                    <div className="input-group">
-                        <input 
-                            type="number"
-                            value={set.weight}
-                            onChange={(e) => handleChange(index, "weight", e.target.value)}
-                        />
-                        <input 
-                            type="number"
-                            value={set.reps}
-                            onChange={(e) => handleChange(index, "reps", e.target.value)}
-                        />
-                        <button onClick={() => handleConfirm(index)}>✔</button>
-                        <button onClick={() => handleDeleteSet(index)}>✖</button>
-                    </div>
                 </div>
             ))}
 
@@ -71,17 +83,19 @@ function ExerciseInput({ exercise, onRemove }) {
                 + Add Set
             </button>
 
-            <button onClick={() => setShowInstructions(!showInstructions)}>
-                {showInstructions ? "Hide Instructions" : "Show Instructions"}
-            </button>
-            {showInstructions && (
-                <div className="instructions">
-                    <p>{exercise.instructions || "No Instructions Available"}</p>
-                </div>
-            )}
             <button className="remove-button" onClick={onRemove}>
                 Remove
             </button>
+
+            {showModal && (
+                <div className="modal-overlay" onClick={() => setShowModal(false)}>
+                    <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+                        <h3>Instructions</h3>
+                        <p>{exercise.instructions || "No Instructions Available" }</p>
+                        <button className="close-button" onClick={() => setShowModal(false)}>Close</button>
+                    </div>
+                </div>
+            )}
         </div>
     )
 

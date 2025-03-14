@@ -2,5 +2,15 @@
 .workout-page {
     display: flex;
     flex-direction: column;
+}
+
+.workout-page h2 {
+    display: flex;
+    justify-content: center;
+}
+
+.search-section {
+    display: flex;
+    flex-direction: column;
     align-items: center;
 }
