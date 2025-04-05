@@ -1,0 +1,35 @@
+
+.navbar {
+    width: 100%;
+    background-color: black;
+    color: aliceblue;
+    border-bottom: 1px solid #333;
+    margin-bottom: 20px;
+}
+
+.navbar-links {
+    display: flex;
+    justify-content: space-evenly;
+    padding: 20px;
+}
+
+.navbar-link {
+    font-size: 1.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.navbar-link:hover {
+    cursor: pointer;
+}
+
+.navbar-links a {
+    font-weight: 500;
+    color: rgb(255, 145, 0);
+    text-decoration: inherit;
+}
+
+.navbar-links a:hover {
+    color: #ffe08b;
+} 

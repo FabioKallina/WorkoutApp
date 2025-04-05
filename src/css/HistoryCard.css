@@ -1,0 +1,17 @@
+
+.history-card-container {
+    border: 1px solid #333;
+    display: flex;
+}
+
+.history-card-display {
+    padding: 30px;
+}
+
+.history-card-display h5 {
+    color: #737272;
+}
+
+.history-card-display p {
+    color: #737272;
+}

@@ -1,0 +1,35 @@
+.profile-container {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    height: 100vh;
+}
+
+img {
+    height: 400px;
+    width: 400px;
+    margin-top: 60px;
+    border-radius: 50%;
+}
+
+.login-btn {
+    border-radius: 8px;
+    border: 3px solid transparent;
+    font-size: 1em;
+    font-weight: 500;
+    font-family: inherit;
+    background-color: rgb(255, 145, 0);
+    color: black;
+    cursor: pointer;
+    transition: background-color 0.25s;
+    padding: 10px 70px;
+    font-size: 1.2rem;
+}
+
+@media (max-width: 1200px) {
+    img {
+        height: 350px;
+        width: 350px;
+    }
+}

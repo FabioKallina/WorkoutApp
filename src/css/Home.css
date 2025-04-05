@@ -1,0 +1,22 @@
+.home-display {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px;
+}
+
+.home-display h3 {
+    margin-bottom: 30px;
+}
+
+.image-container {
+    border: 4px solid black;
+}
+
+img {
+    height: 400px;
+    width: 400px;
+    margin-top: 60px;
+}
+

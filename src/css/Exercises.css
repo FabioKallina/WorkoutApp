@@ -1,0 +1,50 @@
+
+.exercises-container {
+    height: 100%;
+    padding: 10px;
+}
+
+.category-list {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 30px;
+    padding: 10px;
+}
+
+.category-button {
+    padding: 10px 20px;
+    cursor: pointer;
+    background-color: black;
+    color: rgb(255, 145, 0);
+    border: 1px solid #333;
+    border-radius: 8px;
+    transition: border 0.3s ease;
+}
+
+.category-button:hover {
+    border: 1px solid aliceblue;
+}
+
+.start-display {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    margin-bottom: 20px;
+}
+
+@media (max-width: 1339px) {
+    .category-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+}
+
+@media (max-width: 645px) {
+
+    .category-button {
+        padding: 10px 10px;
+    }
+}
