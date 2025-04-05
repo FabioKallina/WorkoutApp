@@ -33,3 +33,10 @@
 .navbar-links a:hover {
     color: #ffe08b;
 } 
+
+@media (max-width: 480px) {
+
+    .navbar-link {
+        font-size: 1.4rem;
+    }
+}

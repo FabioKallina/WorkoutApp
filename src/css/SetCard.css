@@ -102,6 +102,7 @@
 
 .button-container .done {
     background-color: green;
+    color: white;
     border: none;
     border-radius: 8px;
     padding: 10px;
@@ -109,6 +110,7 @@
 
 .button-container .cancel {
     background-color: red;
+    color: white;
     border: none;
     border-radius: 8px;
     padding: 10px;
@@ -179,4 +181,20 @@
     .remove-button {
         font-size: 1.4rem;
     }
+}
+
+@media (max-width: 480px) {
+
+    .input-group input {
+        font-size: 1.2rem;
+    }
+
+    .add-set-button {
+        font-size: 1.2rem;
+    }
+
+    .remove-button {
+        font-size: 1.2rem;
+    }
+
 }

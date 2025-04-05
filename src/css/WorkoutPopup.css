@@ -65,6 +65,7 @@
 
 .timer-button {
     background-color: black;
+    color: white;
     border: none;
     border-radius: 8px;
     cursor: pointer;
@@ -74,6 +75,7 @@
 
 .finish-button {
     background-color: green;
+    color: white;
     border: none;
     border-radius: 8px;
     cursor: pointer;
@@ -183,4 +185,9 @@
     }
 }
 
-@media (max-width: 689px) {}
+@media (max-width: 480px) {
+
+    .summary-exercise {
+        line-height: 1.3;
+    }
+}

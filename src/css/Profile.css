@@ -33,3 +33,10 @@ img {
         width: 350px;
     }
 }
+
+@media (max-width: 480px) {
+    img {
+        width: 275px;
+        height: 275px;
+    }
+}
