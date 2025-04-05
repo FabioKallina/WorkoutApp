@@ -156,7 +156,6 @@
 
     .set-overlay {
         display: flex;
-        flex-wrap: wrap;
     }
 
     .input-pair {
@@ -184,6 +183,11 @@
 }
 
 @media (max-width: 480px) {
+    
+    .set-overlay h2 {
+        font-size: 1.2rem;
+        line-height: 1;
+    }
 
     .input-group input {
         font-size: 1.2rem;
