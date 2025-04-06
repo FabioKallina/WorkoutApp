@@ -128,8 +128,6 @@ const WorkoutPopup = ({ onClose }) => {
           ))}
         </div>
 
-        <button className="add-exercise-btn" onClick={() => setShowSearch(true)}>Add Exercise</button>
-
         {showSearch && (
           <div className="search-display">
             <SearchBar onSearch={handleSearch} />
@@ -144,6 +142,8 @@ const WorkoutPopup = ({ onClose }) => {
             </div>
           </div>
         )}
+
+        <button className="add-exercise-btn" onClick={() => setShowSearch(true)}>Add Exercise</button>
 
         {/* Close Button */}
         <button className="close-btn" onClick={onClose}>Close</button>
