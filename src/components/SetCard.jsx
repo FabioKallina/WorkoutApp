@@ -69,7 +69,7 @@ const SetCard = ({ exercise, onRemove, onUpdateSets }) => {
 
                         <div className="button-container">
                             <button className="done" onClick={() => handleConfirmSet(index)}>✔</button>
-                            <button className="cancel" onClick={() => handleDeleteSet(index)}>X</button>
+                            <button className="cancel" onClick={() => handleDeleteSet(index)}>✗</button>
                         </div>
                     </div>
                 </div>
