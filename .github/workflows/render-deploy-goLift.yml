@@ -10,21 +10,20 @@ on:
 jobs: 
   deploy:
     runs-on: ubuntu-latest
-  steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
-      with:
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
         submodules: false
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: "18"
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18"
 
-    - name: Install dependencies
-      run: npm install
+      - name: Install dependencies
+        run: npm install
 
-    - name: Trigger Render Deploy
-      run: 
-        curl -X POST https://api.render.com/deploy/srv-cvqt0obe5dus73fu9sa0?key=e3Oe8lTAxjQ
+      - name: Trigger Render Deploy
+        run: curl -X POST https://api.render.com/deploy/srv-cvqt0obe5dus73fu9sa0?key=e3Oe8lTAxjQ
      
