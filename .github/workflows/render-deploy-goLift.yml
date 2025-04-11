@@ -4,7 +4,7 @@ name: Deploy goLift on Render
 on: 
   push: 
     branches:
-      - master
+      - main
   workflow_dispatch:
 
 jobs: 
