@@ -136,7 +136,7 @@ const WorkoutPopup = ({ onClose }) => {
               {searchResults.map((exercise) => (
                 <div key={exercise.id} className="search-result-item" >
                   <span>{exercise.name}</span>
-                  <button onClick={() => handleAddExercise(exercise)}>+ Add</button>
+                  <button onClick={() => handleAddExercise(exercise)}>Add</button>
                 </div>
               ))}
             </div>
